@@ -3,719 +3,313 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Semovente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semovente - Responsivo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
-    <link href="lib/bootstrap/datatables.bootstrap.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-
     <style>
-        .sidebar-bottom {
-            margin-top: auto;
-        }
-
+        /* Estilo para remover as setas do input tipo número */
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
 
-        @media (max-width: 900px) {
+        /* Esconde o texto da sidebar em telas menores e a encolhe */
+        @media (max-width: 1024px) {
             aside {
-                width: 60px !important;
+                width: 4rem !important; /* 64px */
             }
 
             .sidebar-label,
             .sidebar-title {
                 display: none !important;
             }
-
-            main,
-            header {
-                margin-left: 60px !important;
-            }
         }
     </style>
 </head>
 
-<body class="bg-slate-100 min-h-screen">
-
+<body class="bg-slate-100">
     <div class="flex min-h-screen">
-        <aside
-            class="w-64 bg-green-900 text-white flex flex-col py-8 fixed left-0 top-0 h-screen z-20 shadow-2xl transition-all duration-300">
+        <aside class="w-64 bg-green-900 text-white flex flex-col py-8 fixed left-0 top-0 h-full z-20 shadow-2xl transition-all duration-300">
             <h2 class="sidebar-title text-center text-2xl font-bold tracking-wide mb-10">Consultas</h2>
             <nav class="flex-1">
                 <ul class="space-y-1 px-3">
                     <li>
-                        <a href="../index.html"
-                            class="flex items-center gap-3 px-4 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                        <a href="../index.html" class="flex items-center justify-center lg:justify-start gap-3 px-4 py-3 rounded-lg hover:bg-green-700 transition">
                             <i class="fas fa-link text-lg"></i>
                             <span class="sidebar-label">Links</span>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/semovente.html"
-                            class="flex items-center gap-3 px-4 py-3 bg-green-800 font-semibold rounded-lg hover:bg-green-700 transition">
+                        <a href="#" class="flex items-center justify-center lg:justify-start gap-3 px-4 py-3 rounded-lg bg-green-800 font-semibold hover:bg-green-700 transition">
                             <i class="fas fa-cow"></i>
                             <span class="sidebar-label">Semovente</span>
                         </a>
                     </li>
                 </ul>
             </nav>
-            <div class="px-6 pt-6 sidebar-bottom">
-                <button
-                    class="w-full py-2 rounded bg-green-800 hover:bg-green-700 text-white font-bold flex items-center gap-3 justify-center">
+            <div class="px-3 mt-auto">
+                <button class="w-full py-2 rounded bg-green-800 hover:bg-green-700 text-white font-bold flex items-center gap-3 justify-center">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="sidebar-label">Sair</span>
                 </button>
             </div>
         </aside>
 
-        <div class="flex-1 flex flex-col min-h-screen" style="margin-left:16rem;">
-            <header class="bg-white shadow flex items-center justify-between px-6 py-4 sticky top-0 z-10"
-                style="margin-left:0;">
+        <div class="flex-1 flex flex-col min-h-screen lg:ml-64 ml-16 transition-all duration-300">
+            <header class="bg-white shadow flex items-center justify-between px-6 py-4 sticky top-0 z-10">
                 <div class="flex items-center gap-4">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg"
-                        class="w-10 h-10 rounded-full object-cover bg-gray-200 border" alt="Usuário">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full object-cover bg-gray-200 border" alt="Usuário">
                     <div>
                         <span class="font-bold text-gray-800 block">Wanderson Felipe</span>
                         <span class="text-sm text-gray-400">wanderson.felipe</span>
                     </div>
                 </div>
                 <div class="ml-auto flex gap-2">
-                    <button class="hover:bg-gray-100 p-2 rounded" title="Perfil"><i
-                            class="fas fa-user-cog"></i></button>
-                    <button class="hover:bg-gray-100 p-2 rounded" title="Configurações"><i
-                            class="fas fa-cog"></i></button>
-                    <button class="hover:bg-gray-100 p-2 rounded" title="Redefinir senha"><i
-                            class="fas fa-key"></i></button>
-                    <button class="hover:bg-gray-100 p-2 rounded" title="Sair"><i
-                            class="fas fa-sign-out-alt"></i></button>
+                    <button class="hover:bg-gray-100 p-2 rounded" title="Perfil"><i class="fas fa-user-cog"></i></button>
+                    <button class="hover:bg-gray-100 p-2 rounded" title="Configurações"><i class="fas fa-cog"></i></button>
+                    <button class="hover:bg-gray-100 p-2 rounded" title="Redefinir senha"><i class="fas fa-key"></i></button>
+                    <button class="hover:bg-gray-100 p-2 rounded" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </header>
 
-            <main class="flex-1 p-6 flex flex-col gap-8" style="margin-left:0;">
-                <div class="bg-white rounded-xl shadow p-3 mb-4 flex-col gap-4 max-w-60 block justify-end ml-auto">
-                    <div class="flex items-center gap-6 py-2">
-                        <label for="estado" class="font-semibold text-gray-700 mr-2">Estado:</label>
-                        <select id="estado" name="estado"
-                            class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600">
+            <main class="flex-1 p-4 md:p-6 flex flex-col gap-8">
+                <div class="bg-white rounded-xl shadow p-4 flex flex-col gap-4 sm:max-w-xs w-full ml-auto">
+                    <div class="flex items-center justify-between gap-4">
+                        <label for="estado" class="font-semibold text-gray-700">Estado:</label>
+                        <select id="estado" name="estado" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 w-full max-w-[100px]">
                             <option value="RO">RO</option>
                             <option value="RR">RR</option>
                             <option value="AM">AM</option>
                         </select>
                     </div>
-                    <div class="flex flex-row items-center gap-2 py-2 justify-center">
-                        <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm w-28">
+                    <div class="flex flex-row items-center gap-2 justify-around">
+                        <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm flex-1 text-center">
                             <span class="font-bold text-green-800 text-sm">Macho:</span>
-                            <span id="valor-macho" contenteditable="true"
-                                class="font-extrabold text-green-700 text-base">R$ 1.600,00</span>
+                            <span id="valor-macho" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 1.600,00</span>
                         </div>
-                        <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm w-28">
+                        <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm flex-1 text-center">
                             <span class="font-bold text-green-800 text-sm">Fêmea:</span>
-                            <span id="valor-femea" contenteditable="true"
-                                class="font-extrabold text-green-700 text-base">R$ 1.400,00</span>
+                            <span id="valor-femea" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 1.400,00</span>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="generatePDF()" class="block justify-end ml-auto bg-green-800 hover:bg-green-700 text-white font-bold 
-                    py-1 px-2 rounded mb-3 transition">
-                    <i class="fas fa-file-pdf"></i>
-                    Gerar PDF
-                </button>
+                <div class="flex justify-end">
+                    <button onclick="generatePDF()" class="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+                        <i class="fas fa-file-pdf"></i> Gerar PDF
+                    </button>
+                </div>
 
-                <div class="flex flex-wrap gap-3 items-center bg-white p-6 rounded-xl shadow mb-3">
-
-                    <form class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+                <div class="bg-white p-4 md:p-6 rounded-xl shadow">
+                    <form class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                         <div class="flex flex-col">
-                            <label for="nome-proprietario" class="text-gray-700 font-semibold mb-1">Nome do
-                                Proprietário:</label>
-                            <input type="text" id="nome-proprietario"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                                placeholder="Digite o nome do proprietário">
+                            <label for="nome-proprietario" class="text-gray-700 font-semibold mb-1">Nome do Proprietário:</label>
+                            <input type="text" id="nome-proprietario" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Digite o nome">
                         </div>
                         <div class="flex flex-col">
-                            <label for="endereco-propriedade" class="text-gray-700 font-semibold mb-1">Endereço da
-                                Propriedade:</label>
-                            <input type="text" id="endereco-propriedade"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                                placeholder="Digite o endereço da propriedade">
+                            <label for="endereco-propriedade" class="text-gray-700 font-semibold mb-1">Endereço da Propriedade:</label>
+                            <input type="text" id="endereco-propriedade" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Digite o endereço">
                         </div>
                         <div class="flex flex-col">
-                            <label for="area-propriedade" class="text-gray-700 font-semibold mb-1">Área da Propriedade
-                                (ha):</label>
-                            <input type="text" id="area-propriedade"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                                placeholder="Digite a área em hectares">
+                            <label for="area-propriedade" class="text-gray-700 font-semibold mb-1">Área da Propriedade (ha):</label>
+                            <input type="text" id="area-propriedade" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Digite a área em hectares">
                         </div>
                         <div class="flex flex-col">
-                            <label for="numero-declaracao" class="text-gray-700 font-semibold mb-1">Nº de
-                                Declaração:</label>
-                            <input type="text" id="numero-declaracao"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                                placeholder="Digite o número da declaração">
+                            <label for="numero-declaracao" class="text-gray-700 font-semibold mb-1">Nº de Declaração:</label>
+                            <input type="text" id="numero-declaracao" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Digite o número">
                         </div>
                         <div class="flex flex-col">
                             <label for="data-emissao" class="text-gray-700 font-semibold mb-1">Data de Emissão:</label>
-                            <input type="date" id="data-emissao"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600">
+                            <input type="date" id="data-emissao" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600">
                         </div>
                         <div class="flex flex-col">
                             <label for="orgao-emissor" class="text-gray-700 font-semibold mb-1">Orgão Emissor:</label>
-                            <input type="text" id="orgao-emissor"
-                                class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                                placeholder="Digite o órgão emissor">
+                            <input type="text" id="orgao-emissor" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Digite o órgão">
                         </div>
                     </form>
-
                 </div>
 
-                <section>
-                    <h1 class="font-bold text-2xl mb-4">Animais cadastrados por faixa etária e sexo</h1>
-                    <div id="dinamic-table" class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg bg-white">
-                            <thead>
-                                <tr class="bg-green-800">
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        0 a 12 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        13 a 24 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        25 a 36 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        Mais de 36 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        Total</th>
-                                    <th class="px-4 py-2 text-center text-xs font-bold text-white">Somatória</th>
-                                </tr>
-                                <tr class="bg-green-700">
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th colspan="1" class="px-2 py-1 text-center text-xs text-white">Macho/Fêmea</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100">
-                                <tr>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="macho0_12"
-                                            class="macho p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="femea0_12"
-                                            class="femea p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="macho13_24"
-                                            class="macho p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="femea13_24"
-                                            class="femea p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="macho25_36"
-                                            class="macho p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="femea25_36"
-                                            class="femea p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center">
-                                        <input type="number" id="macho36mais"
-                                            class="macho p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900">
-                                        <input type="number" id="femea36mais"
-                                            class="femea p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-
-                                    <td id="machoTotal" class="px-2 py-2 text-center"><input type="number" readonly
-                                            class=" p-1 w-28 border rounded focus:ring-2 focus:ring-green-600 bg-gray-100 cursor-not-allowed">
-                                    </td>
-                                    <td id="femeaTotal" class="px-2 py-2 text-center border-r border-green-900"><input
-                                            type="number" readonly
-                                            class=" p-1 w-28 border rounded focus:ring-2 focus:ring-green-600 bg-gray-100 cursor-not-allowed">
-                                    </td>
-                                    <td class="px-2 py-2 text-center"><input type="text" id="somatoria" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600 bg-gray-100 cursor-not-allowed">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <h1 class="font-bold text-2xl my-8 mb-4">Arrobas por Faixa Etária</h1>
-
-                        <table class="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg bg-white">
-                            <thead>
-                                <tr class="bg-green-800">
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        0 a 12 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        13 a 24 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        25 a 36 meses</th>
-                                    <th colspan="2"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        Mais de 36 meses</th>
-                                </tr>
-                                <tr class="bg-green-700">
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white border-r border-green-900">F
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100">
-                                <tr>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="arrobaM0_12"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="arrobaF0_12"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="arrobaM13_24"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="arrobaF13_24"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center"><input type="number" id="arrobaM25_36"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900"><input type="number"
-                                            id="arrobaF25_36"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center">
-                                        <input type="number" id="arrobaM36mais"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                    <td class="px-2 py-2 text-center border-r border-green-900">
-                                        <input type="number" id="arrobaF36mais"
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <h1 class="font-bold text-2xl my-8 mb-4">Valor da Avaliação</h1>
-
-                        <table class="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg bg-white">
-                            <thead>
-                                <tr class="bg-green-800">
-                                    <th colspan="4"
-                                        class="px-4 py-2 text-center text-xs font-bold text-white border-r border-green-900">
-                                        Valor da Avaliação (R$)</th>
-                                </tr>
-                                <tr class="bg-green-700">
-                                    <th class="px-2 py-1 text-center text-xs text-white">Faixa Etária</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">M</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">F</th>
-                                    <th class="px-2 py-1 text-center text-xs text-white">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100">
-                                <tr>
-                                    <td class="px-2 py-2 text-center">0 a 12 meses</td>
-
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-2 text-center">13 a 24 meses</td>
-
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-2 text-center">25 a 36 meses</td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-2 text-center">+36 meses</td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                    <td class="px-2 py-2 text-center"><input type="text" readonly
-                                            class="p-1 w-28 border rounded focus:ring-2 focus:ring-green-600"></td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-
-                        <div class="w-full flex items-center justify-between mt-8">
-                            <h1 class="font-bold text-2xl my-8 mb-4 ">Declaração</h1>
-                            <h1 class="font-bold text-2xl my-8 mb-4 ">Totais do Rebanho</h1>
+                <section class="flex flex-col gap-8">
+                    <div>
+                        <h2 class="font-bold text-2xl mb-4">Animais por faixa etária e sexo</h2>
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-green-800 text-white">
+                                    <tr>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">0 a 12 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">13 a 24 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">25 a 36 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">+36 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">Total</th>
+                                        <th class="px-2 py-2 text-center text-xs font-bold">Somatória</th>
+                                    </tr>
+                                    <tr class="bg-green-700">
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M/F</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="px-1 py-2"><input type="number" id="macho0_12" class="macho p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea0_12" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="macho13_24" class="macho p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea13_24" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="macho25_36" class="macho p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea25_36" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="macho36mais" class="macho p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea36mais" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" id="somatoria" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="block justify-between ml-auto">
-                            <div class="flex justify-between w-full">
-                                <div class="block bg-white shadow-sm w-full mr-[5em]">
-                                    <div class="bg-green-800 px-4 py-2 mb-2 flex justify-between items-center">
-                                        <span
-                                            class="justify-evenly text-left text-xs font-bold text-white border-r border-green-900">
-                                            Declaração
-                                        </span>
-                                        <div id="copyButton" onClick="copyToClipboard()">
-                                            <i class="fa-solid fa-copy text-white text-xs"></i>
-                                            <span class="text-white text-xs">Copiar</span>
-                                        </div>
-                                    </div>
-                                    <span id="declaracao"
-                                        class="block whitespace-pre-line leading-relaxed text-gray-700 px-4 py-2"></span>
-                                </div>
-                                <table class="min-w-14 divide-y divide-gray-200 rounded-lg shadow-lg bg-white">
-                                    <thead>
-                                        <tr class="bg-green-800">
-                                            <th
-                                                class="px-4 py-2 text-left text-xs font-bold text-white border-r border-green-900">
-                                                Descrição</th>
-                                            <th class="px-4 py-2 text-center text-xs font-bold text-white">Valor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-100">
-                                        <tr>
-                                            <td class="px-4 py-2 font-semibold text-gray-700">Valor total do rebanho
-                                            </td>
-                                            <td class="px-4 py-2 text-center">
-                                                <input type="text" readonly
-                                                    class="p-1 w-32 border rounded focus:ring-2 focus:ring-green-600">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-2 font-semibold text-gray-700">Valor médio do rebanho
-                                            </td>
-                                            <td class="px-4 py-2 text-center">
-                                                <input type="text" readonly
-                                                    class="p-1 w-32 border rounded focus:ring-2 focus:ring-green-600">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
                     </div>
 
-                    <script>
+                    <div>
+                        <h2 class="font-bold text-2xl mb-4">Arrobas por Faixa Etária</h2>
+                         <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-green-800 text-white">
+                                     <tr>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">0 a 12 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">13 a 24 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">25 a 36 meses</th>
+                                        <th colspan="2" class="px-2 py-2 text-center text-xs font-bold">Mais de 36 meses</th>
+                                    </tr>
+                                    <tr class="bg-green-700">
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs border-r border-green-900">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs">F</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="px-1 py-2"><input type="number" id="arrobaM0_12" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="arrobaF0_12" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="arrobaM13_24" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="arrobaF13_24" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="arrobaM25_36" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="arrobaF25_36" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="arrobaM36mais" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                        <td class="px-1 py-2"><input type="number" id="arrobaF36mais" class="p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                    </script>
+                    <div>
+                        <h2 class="font-bold text-2xl mb-4">Valor da Avaliação</h2>
+                         <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-green-800 text-white">
+                                    <tr>
+                                        <th colspan="4" class="px-4 py-2 text-center text-xs font-bold">Valor da Avaliação (R$)</th>
+                                    </tr>
+                                    <tr class="bg-green-700">
+                                        <th class="px-2 py-1 text-center text-xs">Faixa Etária</th>
+                                        <th class="px-2 py-1 text-center text-xs">M</th>
+                                        <th class="px-2 py-1 text-center text-xs">F</th>
+                                        <th class="px-2 py-1 text-center text-xs">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="px-2 py-2 text-center font-semibold">0 a 12 meses</td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-center font-semibold">13 a 24 meses</td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-center font-semibold">25 a 36 meses</td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2 py-2 text-center font-semibold">+36 meses</td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td class="px-1 py-2"><input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="flex flex-col lg:flex-row gap-8 w-full">
+                    <div class="flex-1">
+                        <h2 class="font-bold text-2xl mb-4">Declaração</h2>
+                        <div class="bg-white shadow-lg rounded-lg h-full">
+                            <div class="bg-green-800 px-4 py-2 flex justify-between items-center rounded-t-lg">
+                                <span class="text-left text-xs font-bold text-white">Declaração</span>
+                                <button id="copyButton" onClick="copyToClipboard()" class="flex items-center gap-2 text-white hover:text-green-200">
+                                    <i class="fa-solid fa-copy text-xs"></i>
+                                    <span class="text-xs">Copiar</span>
+                                </button>
+                            </div>
+                            <span id="declaracao" class="block whitespace-pre-line leading-relaxed text-gray-700 px-4 py-2"></span>
+                        </div>
+                    </div>
+
+                    <div class="lg:max-w-md w-full">
+                        <h2 class="font-bold text-2xl mb-4">Totais do Rebanho</h2>
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <table class="w-full">
+                                <thead class="bg-green-800 text-white">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left text-xs font-bold">Descrição</th>
+                                        <th class="px-4 py-2 text-center text-xs font-bold">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2 font-semibold text-gray-700">Valor total do rebanho</td>
+                                        <td class="px-2 py-2 text-center">
+                                            <input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 font-semibold text-gray-700">Valor médio do rebanho</td>
+                                        <td class="px-2 py-2 text-center">
+                                            <input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
     </div>
-
-    <!-- <script src="../assets/js/semovente.js"></script> -->
-    <script>
-        const valoresMacho = {
-            RO: 'R$ 272,50',
-            RR: 'R$ 1.400,00',
-            AM: 'R$ 1.250,00',
-        }
-        const valoresFemea = {
-            RO: 'R$ 252,50',
-            RR: 'R$ 1.300,00',
-            AM: 'R$ 1.150,00',
-        }
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('estado').addEventListener('change', function () {
-                const estado = this.value
-                const machoSpan = document.getElementById('valor-macho')
-                const femeaSpan = document.getElementById('valor-femea')
-                machoSpan.textContent = valoresMacho[estado] || 'R$ 0,00'
-                femeaSpan.textContent = valoresFemea[estado] || 'R$ 0,00'
-                localStorage.setItem('valor-macho', machoSpan.textContent)
-                localStorage.setItem('valor-femea', femeaSpan.textContent)
-            })
-
-            // Carregar valor salvo do localStorage, se existir
-            const machoSpan = document.getElementById('valor-macho')
-            const femeaSpan = document.getElementById('valor-femea')
-            const machoSalvo = localStorage.getItem('valor-macho')
-            const femeaSalvo = localStorage.getItem('valor-femea')
-            const estadoInicial = document.getElementById('estado').value
-            machoSpan.textContent =
-                machoSalvo || valoresMacho[estadoInicial] || 'R$ 0,00'
-            femeaSpan.textContent =
-                femeaSalvo || valoresFemea[estadoInicial] || 'R$ 0,00'
-
-            machoSpan.addEventListener('input', function () {
-                localStorage.setItem('valor-macho', machoSpan.textContent)
-            })
-            femeaSpan.addEventListener('input', function () {
-                localStorage.setItem('valor-femea', femeaSpan.textContent)
-            })
-
-            const machoInputs = document.querySelectorAll('input[type="number"].macho')
-            const femeaInputs = document.querySelectorAll('input[type="number"].femea')
-            const somatoriaInput = document.querySelector('#somatoria')
-
-            function mostrarValores(array) {
-                const valores = Array.from(array).map((input) => input.value || 0)
-                return valores
-            }
-
-            function adicionarTotal(array, totalID) {
-                const total = mostrarValores(array).reduce(
-                    (acc, val) => acc + Number(val),
-                    0
-                )
-                document.querySelector(`#${totalID} input`).value = total
-                return total
-            }
-
-            function atualizarSomatoriaTotal() {
-                const machoTotal = adicionarTotal(machoInputs, 'machoTotal')
-                const femeaTotal = adicionarTotal(femeaInputs, 'femeaTotal')
-                if (somatoriaInput) {
-                    somatoriaInput.value = machoTotal + femeaTotal
-                }
-            }
-
-            function atualizarTabelaAvaliacao() {
-                // Utiliza o valor editado pelo usuário nos campos contenteditable
-                const machoSpan = document.getElementById('valor-macho')
-                const femeaSpan = document.getElementById('valor-femea')
-                const valorMacho = Number(
-                    machoSpan.textContent.replace(/[^\d,]/g, '').replace(',', '.')
-                )
-                const valorFemea = Number(
-                    femeaSpan.textContent.replace(/[^\d,]/g, '').replace(',', '.')
-                )
-
-                const machoFaixa = [
-                    document.getElementById('macho0_12'),
-                    document.getElementById('macho13_24'),
-                    document.getElementById('macho25_36'),
-                    document.getElementById('macho36mais'),
-                ]
-                const femeaFaixa = [
-                    document.getElementById('femea0_12'),
-                    document.getElementById('femea13_24'),
-                    document.getElementById('femea25_36'),
-                    document.getElementById('femea36mais'),
-                ]
-                const arrobaMFaixa = [
-                    document.getElementById('arrobaM0_12'),
-                    document.getElementById('arrobaM13_24'),
-                    document.getElementById('arrobaM25_36'),
-                    document.getElementById('arrobaM36mais'),
-                ]
-                const arrobaFFaixa = [
-                    document.getElementById('arrobaF0_12'),
-                    document.getElementById('arrobaF13_24'),
-                    document.getElementById('arrobaF25_36'),
-                    document.getElementById('arrobaF36mais'),
-                ]
-
-                const tabelaAvaliacao = document.querySelectorAll(
-                    'section table:nth-of-type(3) tbody tr'
-                )
-                let totalRebanho = 0
-                for (let i = 0; i < 4; i++) {
-                    const machoQtd = Number(machoFaixa[i]?.value || 0)
-                    const femeaQtd = Number(femeaFaixa[i]?.value || 0)
-                    const machoArroba = Number(arrobaMFaixa[i]?.value || 0)
-                    const femeaArroba = Number(arrobaFFaixa[i]?.value || 0)
-
-                    const valorMachoFaixa = machoQtd * machoArroba * valorMacho
-                    const valorFemeaFaixa = femeaQtd * femeaArroba * valorFemea
-                    const totalFaixa = valorMachoFaixa + valorFemeaFaixa
-                    totalRebanho += totalFaixa
-                    const linha = tabelaAvaliacao[i]
-                    if (linha) {
-                        const tdMacho = linha.children[1].querySelector('input')
-                        const tdFemea = linha.children[2].querySelector('input')
-                        const tdTotal = linha.children[3].querySelector('input')
-                        if (tdMacho)
-                            tdMacho.value = valorMachoFaixa
-                                ? valorMachoFaixa.toLocaleString('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                })
-                                : ''
-                        if (tdFemea)
-                            tdFemea.value = valorFemeaFaixa
-                                ? valorFemeaFaixa.toLocaleString('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                })
-                                : ''
-                        if (tdTotal)
-                            tdTotal.value = totalFaixa
-                                ? totalFaixa.toLocaleString('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                })
-                                : ''
-                    }
-                }
-                const campoTotalRebanho = document.querySelectorAll(
-                    'td.px-4.py-2.text-center input.p-1.w-32'
-                )[0]
-                if (campoTotalRebanho) {
-                    campoTotalRebanho.value = totalRebanho
-                        ? totalRebanho.toLocaleString('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                        })
-                        : ''
-                }
-                const campoMedioRebanho = document.querySelectorAll(
-                    'td.px-4.py-2.text-center input.p-1.w-32'
-                )[1]
-                const somatoria = Number(
-                    document.getElementById('somatoria').value.replace(/\D/g, '')
-                )
-                if (campoMedioRebanho) {
-                    let valorMedio = ''
-                    if (totalRebanho > 0 && somatoria > 0) {
-                        valorMedio = (totalRebanho / somatoria).toLocaleString(
-                            'pt-BR',
-                            { style: 'currency', currency: 'BRL' }
-                        )
-                    }
-                    campoMedioRebanho.value = valorMedio
-                }
-            }
-
-            function atualizarTudo() {
-                atualizarSomatoriaTotal()
-                atualizarDeclaracao()
-                atualizarTabelaAvaliacao()
-            }
-
-            machoInputs.forEach((input) => {
-                input.addEventListener('input', atualizarTudo)
-            })
-            femeaInputs.forEach((input) => {
-                input.addEventListener('input', atualizarTudo)
-            })
-            const arrobasInputs = [
-                document.getElementById('arrobaM0_12'),
-                document.getElementById('arrobaF0_12'),
-                document.getElementById('arrobaM13_24'),
-                document.getElementById('arrobaF13_24'),
-                document.getElementById('arrobaM25_36'),
-                document.getElementById('arrobaF25_36'),
-                document.getElementById('arrobaM36mais'),
-                document.getElementById('arrobaF36mais'),
-            ]
-            arrobasInputs.forEach((input) => {
-                input.addEventListener('input', atualizarTabelaAvaliacao)
-            })
-            document.getElementById('estado').addEventListener('change', atualizarTudo)
-
-            atualizarTudo()
-        })
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer
-                toast.onmouseleave = Swal.resumeTimer
-            },
-        })
-
-        function copyToClipboard() {
-            const declaracaoText = document.getElementById('declaracao').innerText
-            navigator.clipboard
-                .writeText(declaracaoText)
-                .then(() => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Declaração copiada para a área de transferência!',
-                    })
-                })
-                .catch((err) => {
-                    console.error('Erro ao copiar texto: ', err)
-                })
-        }
-
-        function atualizarDeclaracao() {
-            const orgao = document.getElementById('orgao-emissor').value || '-'
-            const numDec = document.getElementById('numero-declaracao').value || '-'
-            const macho0_12 =
-                document.querySelectorAll('tbody input.macho')[0]?.value || '0'
-            const femea0_12 =
-                document.querySelectorAll('tbody input.femea')[0]?.value || '0'
-            const macho13_24 =
-                document.querySelectorAll('tbody input.macho')[1]?.value || '0'
-            const femea13_24 =
-                document.querySelectorAll('tbody input.femea')[1]?.value || '0'
-            const macho24_36 =
-                document.querySelectorAll('tbody input.macho')[2]?.value || '0'
-            const femea24_36 =
-                document.querySelectorAll('tbody input.femea')[2]?.value || '0'
-            const total =
-                Number(document.querySelector('#machoTotal input').value || 0) +
-                Number(document.querySelector('#femeaTotal input').value || 0)
-
-            const texto = `Declaração ${orgao} Nº ${numDec} / 0 a 12 meses: ${macho0_12}M e ${femea0_12}F / 13 a 24 meses: ${macho13_24}M e ${femea13_24}F / 24 a 36 meses: ${macho24_36}M e ${femea24_36}F.<br>Produtividade: REBANHO BOVINHO COM ${total} UNIDADES, CONFORME A DECLARACAO ${orgao} Nº ${numDec}.`
-            document.getElementById('declaracao').innerHTML = texto
-        }
-
-        document
-            .getElementById('orgao-emissor')
-            .addEventListener('input', atualizarDeclaracao)
-        document
-            .getElementById('numero-declaracao')
-            .addEventListener('input', atualizarDeclaracao)
-
-    </script>
-    <script src="../assets/js/create-pdf.js"></script>
-</body>
-
+    
+    </body>
 </html>
