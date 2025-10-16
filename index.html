@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Consultas Oficiais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .sidebar-bottom {
+      margin-top: auto;
+    }
+
+    @media (max-width: 900px) {
+      aside {
+        width: 60px !important;
+      }
+
+      .sidebar-label,
+      .sidebar-title {
+        display: none !important;
+      }
+
+      main,
+      header {
+        margin-left: 60px !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 min-h-screen">
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar fixa, estilizada Tailwind -->
+    <aside
+      class="w-64 bg-green-900 text-white flex flex-col py-8 fixed left-0 top-0 h-screen z-20 shadow-2xl transition-all duration-300">
+      <h2 class="sidebar-title text-center text-2xl font-bold tracking-wide mb-10">Consultas</h2>
+      <nav class="flex-1">
+        <ul class="space-y-1 px-3">
+          <li>
+            <a href="#"
+              class="flex items-center gap-3 px-4 py-3 rounded-lg bg-green-800 font-semibold hover:bg-green-700 transition">
+              <i class="fas fa-link text-lg"></i>
+              <span class="sidebar-label">Links</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-green-800 transition">
+              <i class="fas fa-cow"></i>
+              <span class="sidebar-label">Semovente</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="px-6 pt-6 sidebar-bottom">
+        <button
+          class="w-full py-2 rounded bg-green-800 hover:bg-green-700 text-white font-bold flex items-center gap-3 justify-center">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="sidebar-label">Sair</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="flex-1 flex flex-col min-h-screen" style="margin-left:16rem;">
+      <!-- Topbar -->
+      <header class="bg-white shadow flex items-center justify-between px-6 py-4 sticky top-0 z-10"
+        style="margin-left:0;">
+        <div class="flex items-center gap-4">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg"
+            class="w-10 h-10 rounded-full object-cover bg-gray-200 border" alt="Usuário">
+          <div>
+            <span class="font-bold text-gray-800 block">Wanderson Felipe</span>
+            <span class="text-sm text-gray-400">wanderson.felipe</span>
+          </div>
+        </div>
+        <div class="ml-auto flex gap-2">
+          <button class="hover:bg-gray-100 p-2 rounded" title="Perfil"><i class="fas fa-user-cog"></i></button>
+          <button class="hover:bg-gray-100 p-2 rounded" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="hover:bg-gray-100 p-2 rounded" title="Redefinir senha"><i class="fas fa-key"></i></button>
+          <button class="hover:bg-gray-100 p-2 rounded" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <!-- Conteúdo principal -->
+      <main class="flex-1 p-6 flex flex-col gap-8" style="margin-left:0;">
+        <!-- Filtro -->
+        <form class="flex flex-wrap gap-3 items-center bg-white p-6 rounded-xl shadow mb-3">
+          <input type="text" id="filtro-texto"
+            class="flex-1 min-w-[160px] max-w-xs border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-green-600"
+            placeholder="Buscar por texto">
+          <select id="filtro-tipo"
+            class="flex-1 min-w-[120px] border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-green-600">
+            <option value="">Tipo de Consulta</option>
+            <option value="portal-transparencia">Portais da Transparência</option>
+            <option value="consulta-selos">Consulta de Selos e Procurações</option>
+            <option value="consulta-veiculos">Consulta veículos</option>
+            <option value="links-rurais">Links rurais</option>
+            <option value="validacao-assinaturas">Validação de Assinaturas e Documentos Digitais</option>
+            <option value="verificador-desconto">Verificador de Descontos de Salário e Pró-labore</option>
+            <option value="validacao-documentos">Validação de Documentos</option>
+            <option value="cadastro-pessoa-juridica">Cadastro de Pessoa Jurídica</option>
+          </select>
+          <button type="button" id="btn-filtrar"
+            class="px-6 py-2 bg-green-900 text-white rounded-md font-bold hover:bg-green-800 transition">Filtrar</button>
+        </form>
+
+        <!-- Cards de consulta -->
+        <section class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+          <!-- ===================== Portal da Transparência ===================== -->
+          <div
+            class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col protal-tranparencia">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Portal da Transparência Governo Federal
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Informações detalhadas sobre servidores, salários e despesas do Governo Federal.
+            </p>
+            <button
+              onclick="window.open('https://portaldatransparencia.gov.br/servidores/consulta?ordenarPor=nome&direcao=asc','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência Itacoatiara/AM
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal municipal de Itacoatiara com informações sobre gastos, receitas e servidores.
+            </p>
+            <button onclick="window.open('https://prefeituradeitacoatiara.com.br/transparencia/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência Governo RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Acesso a informações sobre gestão pública, servidores e despesas do estado de Rondônia.
+            </p>
+            <button onclick="window.open('https://transparencia.ro.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência Guajará-Mirim/RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Informações públicas sobre orçamento, servidores e despesas do município.
+            </p>
+            <button
+              onclick="window.open('https://transparencia.guajaramirim.ro.gov.br/transparencia/index.php','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência ALE RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de remuneração e dados de servidores da Assembleia Legislativa de Rondônia.
+            </p>
+            <button
+              onclick="window.open('https://transparencia.al.ro.leg.br/GestaoPessoas/RemuneracaoServidores/detalhes/279978','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Ariquemes RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal de transparência do município de Ariquemes, com dados de servidores e finanças públicas.
+            </p>
+            <button onclick="window.open('https://transparencia.ariquemes.ro.gov.br/transparencia/index.php','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Campo Novo RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Transparência municipal de Campo Novo com informações sobre servidores e despesas.
+            </p>
+            <button
+              onclick="window.open('https://transparencia.camponovo.ro.gov.br/transparencia/index.php?link=aplicacoes/pessoal/frmpessoal&nomeaplicacao=pessoal&id_menu=18&token=9fee932e8091730ed3b99ad6988eeaa4','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Montenegro RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal de transparência do município de Montenegro, com informações públicas e financeiras.
+            </p>
+            <button onclick="window.open('https://transparencia.montenegro.ro.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência AM Pessoal
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de dados de servidores e remunerações no estado do Amazonas.
+            </p>
+            <button onclick="window.open('https://www.transparencia.am.gov.br/pessoal/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Transparência RR
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal oficial de transparência do estado de Roraima com dados sobre servidores e finanças.
+            </p>
+            <button onclick="window.open('https://www.transparencia.rr.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> TJRO Gestão de Pessoas
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Detalhes de folha de pagamento e gestão de servidores do Tribunal de Justiça de Rondônia.
+            </p>
+            <button
+              onclick="window.open('https://www.tjro.jus.br/gestaodepessoas/transparencia/detalhamento_folha?utf8=%E2%9C%93&tipo_relatorio=html&format=html&transparencia_tb_detalhamento_folha%5Bano%5D=2023&transparencia_tb_detalhamento_folha%5Bmes%5D=9&transparencia_tb_detalhamento_folha%5Bcdg_ordem%5D=5034000&transparencia_tb_detalhamento_folha%5Bnm_cargo%5D=&transparencia_tb_detalhamento_folha%5Bcdg_sitfunc%5D=&transparencia_tb_detalhamento_folha%5Bnm_cargoext%5D=&transparencia_tb_detalhamento_folha%5Bnm_unidade%5D=&button=','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <div class="bg-white portal-transparencia p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-university"></i> Amazonprev AM
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal de servidores e aposentados do estado do Amazonas, com informações de benefícios e remuneração.
+            </p>
+            <button onclick="window.open('https://www.amazonprev.am.gov.br/acesso-a-informacao/servidores/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Consulta de Selos e Procurações ===================== -->
+
+          <!-- Selo TJRO -->
+          <div class="bg-white p-6 consulta-selos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-certificate"></i> Selo TJRO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal oficial do Tribunal de Justiça de Rondônia para verificação de selos digitais.
+            </p>
+            <button onclick="window.open('https://selo.tjro.jus.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Selo TJMT -->
+          <div class="bg-white p-6 consulta-selos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-certificate"></i> Selo TJMT
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de selos digitais do Tribunal de Justiça de Mato Grosso.
+            </p>
+            <button onclick="window.open('https://gif.tjmt.jus.br/selo/Consulta/ConSeloDigitalExterno.aspx','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Selo Roraima -->
+          <div class="bg-white p-6 consulta-selos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-certificate"></i> Selo Roraima
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal de autenticação de documentos do estado de Roraima.
+            </p>
+            <button onclick="window.open('https://selororaima.com.br/login/mainLogin','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Autenticidade SERPRO -->
+          <div class="bg-white p-6 consulta-selos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-certificate"></i> Autenticidade SERPRO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Sistema do SERPRO para verificação da autenticidade de documentos digitais.
+            </p>
+            <button
+              onclick="window.open('https://autenticidade-mre.serpro.gov.br/sci/pages/web/ui/#/autenticidade','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Consulta Veículos ===================== -->
+
+          <!-- Portal SENATRAN -->
+          <div class="bg-white consulta-veiculos p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-car"></i> Portal SENATRAN
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Sistema de serviços do Departamento Nacional de Trânsito para veículos e habilitação.
+            </p>
+            <button onclick="window.open('https://portalservicos.senatran.serpro.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- DETRAN RO -->
+          <div class="bg-white consulta-veiculos p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-car"></i> DETRAN RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal oficial do DETRAN de Rondônia com serviços de veículos e habilitação.
+            </p>
+            <button onclick="window.open('https://www.detran.ro.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- DETRAN AM Digital -->
+          <div class="bg-white consulta-veiculos p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-car"></i> DETRAN AM Digital
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal digital do DETRAN Amazonas para consultas e serviços online de veículos.
+            </p>
+            <button onclick="window.open('https://digital.detran.am.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Getran RR -->
+          <div class="bg-white consulta-veiculos p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-car"></i> Getran RR
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de veículos pelo Renavam e placa no portal Getran Roraima.
+            </p>
+            <button
+              onclick="window.open('https://www.rr.getran.com.br/site/apps/veiculo/filtroplacarenavam-consultaveiculo.jsp','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- FIPE Veículos -->
+          <div class="bg-white consulta-veiculos p-6 rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-car"></i> FIPE Veículos
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de preços de veículos usados e novos pela Tabela FIPE.
+            </p>
+            <button onclick="window.open('https://veiculos.fipe.org.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Links Rurais ===================== -->
+
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-clipboard-list"></i> IDARON RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de declaração cadastral do Instituto de Defesa Agropecuária e Florestal de Rondônia.
+            </p>
+            <button
+              onclick="window.open('https://www.idaron.ro.gov.br/index.php/consulta-de-declaracao-cadastral/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- CAF MDA -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-search"></i> CAF MDA
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta pública de informações do Cadastro de Atividades do Ministério da Agricultura.
+            </p>
+            <button onclick="window.open('https://caf.mda.gov.br/consulta-publica/ufpa','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- DFE RS -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-invoice"></i> DFE RS
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal do Rio Grande do Sul para consulta de CTe e CCC (documentos fiscais eletrônicos).
+            </p>
+            <button onclick="window.open('https://dfe-portal.svrs.rs.gov.br/CTE/CCC','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Confea -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-user-tie"></i> Confea
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de profissionais registrados no Conselho Federal de Engenharia e Agronomia.
+            </p>
+            <button onclick="window.open('https://consultaprofissional.confea.org.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- SITAG -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-search"></i> SITAG
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta externa de profissionais e empresas no sistema corporativo SITAG.
+            </p>
+            <button
+              onclick="window.open('https://corporativo.sitag.org.br/app/view/sight/externo?form=PesquisarPProfissionalEmpresa','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- NFe PR -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-invoice-dollar"></i> NFe PR
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Portal da Secretaria da Fazenda do Paraná para consulta de notas fiscais eletrônicas.
+            </p>
+            <button onclick="window.open('https://www.nfe.fazenda.gov.br/portal/pr','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- SINTEGRA -->
+          <div class="bg-white p-6 links-rurais rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-database"></i> SINTEGRA
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Sistema de integração de informações sobre contribuintes para consulta cadastral.
+            </p>
+            <button onclick="window.open('http://www.sintegra.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Validação de Assinaturas e Documentos Digitais ===================== -->
+
+          <!-- ITI -->
+          <div class="bg-white p-6 validacao-assinaturas rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-check-circle"></i> Validar ITI
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Validação de assinaturas digitais e documentos certificados pelo ITI.
+            </p>
+            <button onclick="window.open('https://validar.iti.gov.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Verificador de Descontos de Salário e pró-labore ===================== -->
+
+          <!-- Verificador de Descontos de Salário e Pró-labore -->
+          <div class="bg-white p-6 verificador-desconto rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-calculator"></i> Verificador de Descontos de Salário e Pró-labore
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Calcule o salário líquido considerando descontos de INSS, IRRF e outros benefícios.
+            </p>
+            <button
+              onclick="window.open('https://www.idinheiro.com.br/calculadoras/calculadora-de-salario-liquido/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- ===================== Validação de Documentos:  ===================== -->
+
+          <!-- validação de documentos -->
+          <div class="bg-white p-6 validacao-documentos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-calculator"></i> Validação de Documentos
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Valide documentos digitais e assinaturas eletrônicas.
+            </p>
+            <button onclick="window.open('https://www1.multidocumentos.com.br/sistema','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Calculadora de Salário Líquido - Mobills -->
+          <div class="bg-white p-6 validacao-documentos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-calculator"></i> Validação de Documentos Com Funarpen
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Valide documentos digitais e assinaturas eletrônicas.
+            </p>
+            <button onclick="window.open('https://www.funarpen.com.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Consulta CNPJ Receita Federal -->
+          <div class="bg-white p-6 validacao-documentos rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-building"></i> Consulta CNA OAB
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulte a inscrição e situação de advogados e sociedades de advocacia na OAB pelo Cadastro Nacional dos
+              Advogados.
+            </p>
+            <button onclick="window.open('https://cna.oab.org.br/','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+
+          <!-- ===================== Cadastro Pessoa Juridica ===================== -->
+
+          <!-- Consulta Simples Nacional -->
+          <div
+            class="bg-white p-6 cadastro-pessoa-juridica rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-alt"></i> Consulta Simples Nacional
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Verifique a opção pelo Simples Nacional de empresas.
+            </p>
+            <button
+              onclick="window.open('https://www8.receita.fazenda.gov.br/SIMPLESNACIONAL/aplicacoes.aspx?id=22','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Certidão Inteiro Teor Empresafacil RO -->
+          <div
+            class="bg-white p-6 cadastro-pessoa-juridica rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-contract"></i> Certidão Inteiro Teor Empresafacil RO
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de certidão de inteiro teor de empresas em Rondônia.
+            </p>
+            <button
+              onclick="window.open('https://www.empresafacil.ro.gov.br/certidao-online/inteiro-teor?tipo_evento=cs&evento%5B%5D=655','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Certidão Inteiro Teor JUCEA AM -->
+          <div
+            class="bg-white p-6 cadastro-pessoa-juridica rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-contract"></i> Certidão Inteiro Teor JUCEA AM
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de certidão de inteiro teor de empresas no Amazonas.
+            </p>
+            <button
+              onclick="window.open('https://portalservicos.jucea.am.gov.br/certidaoweb/pesquisaEmpresas.seam?tipoCertidao=inteiro_teor','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Certidão Inteiro Teor JUCE RR -->
+          <div
+            class="bg-white p-6 cadastro-pessoa-juridica rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-file-contract"></i> Certidão Inteiro Teor JUCE RR
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta de certidão de inteiro teor de empresas em Roraima.
+            </p>
+            <button
+              onclick="window.open('https://projetointegrar.jucerr.rr.gov.br/certidaoweb/pesquisaEmpresas.seam?tipoCertidao=inteiro_teor','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+
+          <!-- Consulta Nacional CFC -->
+          <div
+            class="bg-white p-6 cadastro-pessoa-juridica rounded-xl shadow hover:shadow-2xl transition flex flex-col">
+            <div class="text-lg font-bold text-green-900 flex items-center gap-2 mb-2">
+              <i class="fas fa-user-tie"></i> Consulta Nacional CFC
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Consulta nacional de profissionais registrados no Conselho Federal de Contabilidade.
+            </p>
+            <button onclick="window.open('https://www3.cfc.org.br/SPW/ConsultaNacionalCFC/cfc','_blank')"
+              class="mt-auto px-4 py-2 bg-green-900 text-white rounded font-bold hover:bg-green-800 transition self-end">Acessar</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function filtrarCards() {
+      const tipo = document.getElementById('filtro-tipo').value;
+      const texto = document.getElementById('filtro-texto').value.toLowerCase();
+      const cards = document.querySelectorAll('section.grid > div');
+      cards.forEach(card => {
+        let mostra = true;
+        if (tipo) {
+          mostra = card.classList.contains(tipo);
+        }
+        if (mostra && texto) {
+          mostra = card.textContent.toLowerCase().includes(texto);
+        }
+        card.style.display = mostra ? '' : 'none';
+      });
+    }
+    document.getElementById('btn-filtrar').addEventListener('click', filtrarCards);
+    document.getElementById('filtro-tipo').addEventListener('change', filtrarCards);
+    document.getElementById('filtro-texto').addEventListener('input', filtrarCards);
+  </script>
+</body>
+
+</html>
