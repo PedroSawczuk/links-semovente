@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semovente - Responsivo</title>
+    <title>Semovente - Funcional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
     <style>
-        /* Estilo para remover as setas do input tipo número */
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
 
-        /* Esconde o texto da sidebar em telas menores e a encolhe */
         @media (max-width: 1024px) {
             aside {
-                width: 4rem !important; /* 64px */
+                width: 4rem !important;
             }
 
             .sidebar-label,
@@ -38,7 +36,7 @@
             <nav class="flex-1">
                 <ul class="space-y-1 px-3">
                     <li>
-                        <a href="../index.html" class="flex items-center justify-center lg:justify-start gap-3 px-4 py-3 rounded-lg hover:bg-green-700 transition">
+                        <a href="#" class="flex items-center justify-center lg:justify-start gap-3 px-4 py-3 rounded-lg hover:bg-green-700 transition">
                             <i class="fas fa-link text-lg"></i>
                             <span class="sidebar-label">Links</span>
                         </a>
@@ -88,12 +86,12 @@
                     </div>
                     <div class="flex flex-row items-center gap-2 justify-around">
                         <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm flex-1 text-center">
-                            <span class="font-bold text-green-800 text-sm">Macho:</span>
-                            <span id="valor-macho" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 1.600,00</span>
+                            <span class="font-bold text-green-800 text-sm">Macho (@):</span>
+                            <span id="valor-macho" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 272,50</span>
                         </div>
                         <div class="flex flex-col items-center bg-green-100 rounded-lg px-2 py-1 shadow-sm flex-1 text-center">
-                            <span class="font-bold text-green-800 text-sm">Fêmea:</span>
-                            <span id="valor-femea" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 1.400,00</span>
+                            <span class="font-bold text-green-800 text-sm">Fêmea (@):</span>
+                            <span id="valor-femea" contenteditable="true" class="font-extrabold text-green-700 text-base">R$ 252,50</span>
                         </div>
                     </div>
                 </div>
@@ -171,8 +169,8 @@
                                         <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea25_36" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
                                         <td class="px-1 py-2"><input type="number" id="macho36mais" class="macho p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
                                         <td class="px-1 py-2 border-r border-gray-200"><input type="number" id="femea36mais" class="femea p-1 w-full border rounded focus:ring-2 focus:ring-green-600 text-center"></td>
-                                        <td class="px-1 py-2"><input type="number" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
-                                        <td class="px-1 py-2 border-r border-gray-200"><input type="number" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td id="machoTotal" class="px-1 py-2"><input type="number" id="total-machos" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
+                                        <td id="femeaTotal" class="px-1 py-2 border-r border-gray-200"><input type="number" id="total-femeas" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
                                         <td class="px-1 py-2"><input type="text" id="somatoria" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center"></td>
                                     </tr>
                                 </tbody>
@@ -182,10 +180,10 @@
 
                     <div>
                         <h2 class="font-bold text-2xl mb-4">Arrobas por Faixa Etária</h2>
-                         <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-green-800 text-white">
-                                     <tr>
+                                    <tr>
                                         <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">0 a 12 meses</th>
                                         <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">13 a 24 meses</th>
                                         <th colspan="2" class="px-2 py-2 text-center text-xs font-bold border-r border-green-900">25 a 36 meses</th>
@@ -220,8 +218,8 @@
 
                     <div>
                         <h2 class="font-bold text-2xl mb-4">Valor da Avaliação</h2>
-                         <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
+                        <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                            <table id="tabela-avaliacao" class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-green-800 text-white">
                                     <tr>
                                         <th colspan="4" class="px-4 py-2 text-center text-xs font-bold">Valor da Avaliação (R$)</th>
@@ -263,7 +261,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <section class="flex flex-col lg:flex-row gap-8 w-full">
                     <div class="flex-1">
                         <h2 class="font-bold text-2xl mb-4">Declaração</h2>
@@ -293,13 +291,13 @@
                                     <tr>
                                         <td class="px-4 py-2 font-semibold text-gray-700">Valor total do rebanho</td>
                                         <td class="px-2 py-2 text-center">
-                                            <input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
+                                            <input type="text" id="valor-total-rebanho" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-4 py-2 font-semibold text-gray-700">Valor médio do rebanho</td>
                                         <td class="px-2 py-2 text-center">
-                                            <input type="text" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
+                                            <input type="text" id="valor-medio-rebanho" readonly class="p-1 w-full border rounded bg-gray-100 cursor-not-allowed text-center">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -310,6 +308,343 @@
             </main>
         </div>
     </div>
-    
-    </body>
+
+    <script>
+        // --- Início do código semovente.js ---
+        const valoresMacho = {
+            RO: 'R$ 272,50',
+            RR: 'R$ 1.400,00',
+            AM: 'R$ 1.250,00',
+        };
+        const valoresFemea = {
+            RO: 'R$ 252,50',
+            RR: 'R$ 1.300,00',
+            AM: 'R$ 1.150,00',
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualiza o valor da arroba baseado no estado
+            document.getElementById('estado').addEventListener('change', function() {
+                const estado = this.value;
+                const machoSpan = document.getElementById('valor-macho');
+                const femeaSpan = document.getElementById('valor-femea');
+                machoSpan.textContent = valoresMacho[estado] || 'R$ 0,00';
+                femeaSpan.textContent = valoresFemea[estado] || 'R$ 0,00';
+                localStorage.setItem('valor-macho', machoSpan.textContent);
+                localStorage.setItem('valor-femea', femeaSpan.textContent);
+                atualizarTudo(); // Re-calcula tudo quando o estado muda
+            });
+
+            // Salva o valor editado da arroba no localStorage
+            const machoSpan = document.getElementById('valor-macho');
+            const femeaSpan = document.getElementById('valor-femea');
+
+            machoSpan.addEventListener('input', function() {
+                localStorage.setItem('valor-macho', machoSpan.textContent);
+                atualizarTudo();
+            });
+            femeaSpan.addEventListener('input', function() {
+                localStorage.setItem('valor-femea', femeaSpan.textContent);
+                atualizarTudo();
+            });
+
+            // Carrega valor salvo do localStorage ou valor inicial
+            const machoSalvo = localStorage.getItem('valor-macho');
+            const femeaSalvo = localStorage.getItem('valor-femea');
+            const estadoInicial = document.getElementById('estado').value;
+            machoSpan.textContent = machoSalvo || valoresMacho[estadoInicial] || 'R$ 0,00';
+            femeaSpan.textContent = femeaSalvo || valoresFemea[estadoInicial] || 'R$ 0,00';
+
+            const machoInputs = document.querySelectorAll('input.macho');
+            const femeaInputs = document.querySelectorAll('input.femea');
+            const somatoriaInput = document.getElementById('somatoria');
+
+            function getValues(array) {
+                return Array.from(array).map((input) => Number(input.value) || 0);
+            }
+
+            function sumValues(array) {
+                return getValues(array).reduce((acc, val) => acc + val, 0);
+            }
+
+            function atualizarSomatoriaTotal() {
+                const totalMachos = sumValues(machoInputs);
+                const totalFemeas = sumValues(femeaInputs);
+
+                document.getElementById('total-machos').value = totalMachos;
+                document.getElementById('total-femeas').value = totalFemeas;
+
+                if (somatoriaInput) {
+                    somatoriaInput.value = totalMachos + totalFemeas;
+                }
+            }
+
+            function atualizarTabelaAvaliacao() {
+                const valorMacho = Number(machoSpan.textContent.replace(/[^\d,]/g, '').replace(',', '.'));
+                const valorFemea = Number(femeaSpan.textContent.replace(/[^\d,]/g, '').replace(',', '.'));
+
+                const machoFaixa = getValues([
+                    document.getElementById('macho0_12'),
+                    document.getElementById('macho13_24'),
+                    document.getElementById('macho25_36'),
+                    document.getElementById('macho36mais'),
+                ]);
+                const femeaFaixa = getValues([
+                    document.getElementById('femea0_12'),
+                    document.getElementById('femea13_24'),
+                    document.getElementById('femea25_36'),
+                    document.getElementById('femea36mais'),
+                ]);
+                const arrobaMFaixa = getValues([
+                    document.getElementById('arrobaM0_12'),
+                    document.getElementById('arrobaM13_24'),
+                    document.getElementById('arrobaM25_36'),
+                    document.getElementById('arrobaM36mais'),
+                ]);
+                const arrobaFFaixa = getValues([
+                    document.getElementById('arrobaF0_12'),
+                    document.getElementById('arrobaF13_24'),
+                    document.getElementById('arrobaF25_36'),
+                    document.getElementById('arrobaF36mais'),
+                ]);
+
+                // CORREÇÃO: Usando ID para um seletor mais robusto
+                const tabelaAvaliacao = document.querySelectorAll('#tabela-avaliacao tbody tr');
+                let totalRebanho = 0;
+
+                for (let i = 0; i < 4; i++) {
+                    const valorMachoFaixa = machoFaixa[i] * arrobaMFaixa[i] * valorMacho;
+                    const valorFemeaFaixa = femeaFaixa[i] * arrobaFFaixa[i] * valorFemea;
+                    const totalFaixa = valorMachoFaixa + valorFemeaFaixa;
+                    totalRebanho += totalFaixa;
+
+                    const linha = tabelaAvaliacao[i];
+                    if (linha) {
+                        const tdMacho = linha.children[1].querySelector('input');
+                        const tdFemea = linha.children[2].querySelector('input');
+                        const tdTotal = linha.children[3].querySelector('input');
+
+                        const formatCurrency = (value) => value ? value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                        
+                        if (tdMacho) tdMacho.value = formatCurrency(valorMachoFaixa);
+                        if (tdFemea) tdFemea.value = formatCurrency(valorFemeaFaixa);
+                        if (tdTotal) tdTotal.value = formatCurrency(totalFaixa);
+                    }
+                }
+
+                // CORREÇÃO: Usando ID para seletores robustos
+                const campoTotalRebanho = document.getElementById('valor-total-rebanho');
+                const campoMedioRebanho = document.getElementById('valor-medio-rebanho');
+
+                if (campoTotalRebanho) {
+                    campoTotalRebanho.value = totalRebanho.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                }
+
+                const somatoria = Number(document.getElementById('somatoria').value) || 0;
+                if (campoMedioRebanho) {
+                    let valorMedio = '';
+                    if (totalRebanho > 0 && somatoria > 0) {
+                        valorMedio = (totalRebanho / somatoria).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    }
+                    campoMedioRebanho.value = valorMedio;
+                }
+            }
+            
+            function atualizarTudo() {
+                atualizarSomatoriaTotal();
+                atualizarTabelaAvaliacao();
+                atualizarDeclaracao();
+            }
+
+            // Adiciona listeners para todos os inputs relevantes
+            const allInputs = document.querySelectorAll('input[type="number"]');
+            allInputs.forEach(input => {
+                input.addEventListener('input', atualizarTudo);
+            });
+
+            document.getElementById('orgao-emissor').addEventListener('input', atualizarDeclaracao);
+            document.getElementById('numero-declaracao').addEventListener('input', atualizarDeclaracao);
+
+            atualizarTudo(); // Roda uma vez para inicializar
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            },
+        });
+
+        function copyToClipboard() {
+            const declaracaoText = document.getElementById('declaracao').innerText;
+            navigator.clipboard.writeText(declaracaoText)
+                .then(() => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Declaração copiada!',
+                    });
+                })
+                .catch((err) => {
+                    console.error('Erro ao copiar texto: ', err);
+                });
+        }
+
+        function atualizarDeclaracao() {
+            const orgao = document.getElementById('orgao-emissor').value || '-';
+            const numDec = document.getElementById('numero-declaracao').value || '-';
+            const macho0_12 = document.getElementById('macho0_12').value || '0';
+            const femea0_12 = document.getElementById('femea0_12').value || '0';
+            const macho13_24 = document.getElementById('macho13_24').value || '0';
+            const femea13_24 = document.getElementById('femea13_24').value || '0';
+            // CORREÇÃO: Nome da variável e inclusão do +36
+            const macho25_36 = document.getElementById('macho25_36').value || '0';
+            const femea25_36 = document.getElementById('femea25_36').value || '0';
+            const macho36mais = document.getElementById('macho36mais').value || '0';
+            const femea36mais = document.getElementById('femea36mais').value || '0';
+
+            const total = document.getElementById('somatoria').value || '0';
+
+            // CORREÇÃO: Texto da declaração completo e mais claro
+            const texto = `Declaração ${orgao} Nº ${numDec} / 0 a 12 meses: ${macho0_12}M e ${femea0_12}F / 13 a 24 meses: ${macho13_24}M e ${femea13_24}F / 25 a 36 meses: ${macho25_36}M e ${femea25_36}F / +36 meses: ${macho36mais}M e ${femea36mais}F.
+Produtividade: REBANHO BOVINO COM ${total} UNIDADES, CONFORME A DECLARACAO ${orgao} Nº ${numDec}.`;
+
+            document.getElementById('declaracao').innerHTML = texto.replace(/\n/g, '<br>');
+        }
+    </script>
+
+    <script>
+        // --- Início do código gerarpdf.js ---
+        async function generatePDF() {
+            const { PDFDocument, rgb, StandardFonts } = PDFLib;
+
+            const pdfDoc = await PDFDocument.create();
+            const page = pdfDoc.addPage([595, 842]);
+            const { height } = page.getSize();
+            const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+            // Tenta carregar o logo, mas continua se falhar
+            try {
+                // ATENÇÃO: Verifique se este caminho para o logo está correto
+                const imageUrl = 'https://sicoobamazonia.com.br/wp-content/uploads/2023/11/logo-sicoob-amazonia-2.png'; // Exemplo de URL online
+                const imageBytes = await fetch(imageUrl).then((res) => res.arrayBuffer());
+                const image = await pdfDoc.embedPng(imageBytes);
+                const imageDims = image.scale(0.1);
+                page.drawImage(image, {
+                    x: 50,
+                    y: height - 20 - imageDims.height,
+                    width: imageDims.width,
+                    height: imageDims.height,
+                    opacity: 0.5,
+                });
+            } catch (e) {
+                console.error("Não foi possível carregar o logo:", e);
+            }
+
+            const titulo = 'Relatório - Semovente';
+            const titleSize = 24;
+            const textWidth = font.widthOfTextAtSize(titulo, titleSize);
+            page.drawText(titulo, {
+                x: (page.getWidth() - textWidth) / 2,
+                y: height - 100,
+                size: titleSize,
+                font,
+                color: rgb(0.1, 0.4, 0.2),
+            });
+
+            // Dados do proprietário
+            page.drawText('Informações do Proprietário:', { x: 50, y: height - 140, size: 14, font, color: rgb(0.1, 0.4, 0.2) });
+            const nomeProprietario = document.getElementById('nome-proprietario').value || 'Não Informado';
+            const infoProprietario = [
+                `Nome: ${nomeProprietario}`,
+                `Endereço: ${document.getElementById('endereco-propriedade').value || 'Não Informado'}`,
+                `Área (ha): ${document.getElementById('area-propriedade').value || '0'}`,
+                `Órgão Emissor: ${document.getElementById('orgao-emissor').value || 'Não Informado'}`,
+                `Nº Declaração: ${document.getElementById('numero-declaracao').value || '000000'}`,
+                `Data de Emissão: ${document.getElementById('data-emissao').value || '00/00/0000'}`,
+            ];
+            infoProprietario.forEach((text, i) => {
+                page.drawText(text, { x: 50, y: height - 160 - (i * 15), size: 10, font, color: rgb(0.2, 0.2, 0.2) });
+            });
+
+            // Totais do rebanho
+            page.drawText('Totais do Rebanho:', { x: 370, y: height - 140, size: 14, font, color: rgb(0.1, 0.4, 0.2) });
+            const infoRebanho = [
+                `Valor total: ${document.getElementById('valor-total-rebanho').value || 'R$ 0,00'}`,
+                `Valor médio: ${document.getElementById('valor-medio-rebanho').value || 'R$ 0,00'}`,
+            ];
+            infoRebanho.forEach((text, i) => {
+                page.drawText(text, { x: 370, y: height - 160 - (i * 15), size: 10, font, color: rgb(0.2, 0.2, 0.2) });
+            });
+
+            // --- Função para desenhar tabelas ---
+            function drawTable(startX, startY, title, headers, rows) {
+                page.drawText(title, { x: startX, y: startY, size: 14, font, color: rgb(0.1, 0.4, 0.2) });
+                let currentY = startY - 25;
+                const rowHeight = 20;
+                const tableWidth = 500;
+                const colWidths = [200, 150, 150];
+
+                // Header
+                page.drawRectangle({ x: startX, y: currentY - 5, width: tableWidth, height: rowHeight, color: rgb(0.1, 0.4, 0.2) });
+                headers.forEach((header, i) => {
+                    let colX = startX + 10 + colWidths.slice(0, i).reduce((a, b) => a + b, 0);
+                    page.drawText(header, { x: colX, y: currentY, size: 10, font, color: rgb(1, 1, 1) });
+                });
+                currentY -= rowHeight;
+
+                // Rows
+                rows.forEach((row, rowIndex) => {
+                    const rowColor = rowIndex % 2 === 0 ? rgb(0.9, 0.95, 0.9) : rgb(1, 1, 1);
+                    page.drawRectangle({ x: startX, y: currentY - 5, width: tableWidth, height: rowHeight, color: rowColor });
+                    row.forEach((cell, i) => {
+                        let colX = startX + 10 + colWidths.slice(0, i).reduce((a, b) => a + b, 0);
+                        page.drawText(String(cell), { x: colX, y: currentY, size: 10, font, color: rgb(0.2, 0.2, 0.2) });
+                    });
+                    currentY -= rowHeight;
+                });
+                return currentY; // Retorna a posição Y final para a próxima tabela
+            }
+            
+            // Dados para tabela de Animais
+            const animaisHeaders = ['Faixa Etária', 'Machos (Qtd)', 'Fêmeas (Qtd)'];
+            const animaisRows = [
+                ['0 a 12 meses', document.getElementById('macho0_12').value || '0', document.getElementById('femea0_12').value || '0'],
+                ['13 a 24 meses', document.getElementById('macho13_24').value || '0', document.getElementById('femea13_24').value || '0'],
+                ['25 a 36 meses', document.getElementById('macho25_36').value || '0', document.getElementById('femea25_36').value || '0'],
+                ['+36 meses', document.getElementById('macho36mais').value || '0', document.getElementById('femea36mais').value || '0'],
+                ['Total', document.getElementById('total-machos').value || '0', document.getElementById('total-femeas').value || '0'],
+            ];
+            let nextY = drawTable(50, height - 260, 'Animais por Faixa Etária', animaisHeaders, animaisRows);
+
+            // Dados para tabela de Arrobas
+            const arrobaHeaders = ['Faixa Etária', 'Machos (@)', 'Fêmeas (@)'];
+            const arrobaRows = [
+                ['0 a 12 meses', document.getElementById('arrobaM0_12').value || '0', document.getElementById('arrobaF0_12').value || '0'],
+                ['13 a 24 meses', document.getElementById('arrobaM13_24').value || '0', document.getElementById('arrobaF13_24').value || '0'],
+                ['25 a 36 meses', document.getElementById('arrobaM25_36').value || '0', document.getElementById('arrobaF25_36').value || '0'],
+                ['+36 meses', document.getElementById('arrobaM36mais').value || '0', document.getElementById('arrobaF36mais').value || '0'],
+            ];
+            drawTable(50, nextY - 20, 'Arrobas por Faixa Etária', arrobaHeaders, arrobaRows);
+
+            // Rodapé
+            const date = new Date().toLocaleDateString('pt-BR');
+            page.drawText(`Gerado em: ${date}`, { x: 450, y: 30, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
+            page.drawText(`Sicoob Amazônia`, { x: 50, y: 30, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
+
+            // Salvar e baixar o PDF
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            const formataNome = (nome) => nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
+            link.download = `relatorio_semovente_${formataNome(nomeProprietario)}.pdf`;
+            link.click();
+        }
+    </script>
+</body>
 </html>
